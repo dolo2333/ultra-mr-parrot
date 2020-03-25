@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+            rel="stylesheet"
+            href="/css/jpetstore.css"
+            type="text/css"
+            media="screen"
+    />
+    <title>Mypetstore</title>
+</head>
+<body>
+<div th:replace="top"></div>
+<div id="Content">
+    <div id="Catalog">
+        <form id="newAccount" action="/account/newAccountForm" method="POST">
+            <h3>账户信息</h3>
+
+            <table>
+                <tr>
+                    <td>请输入用户名:</td>
+                    <td><input type="text" name="userid" /></td>
+                </tr>
+                <tr>
+                    <td>请输入用户密码:</td>
+                    <td><input type="password" name="password" /></td>
+                </tr>
+                <tr>
+                    <td>请再次输入密码:</td>
+                    <td><input type="password" name="repeatedPassword" /></td>
+                </tr>
+            </table>
+
+<!--            <%@ include file="IncludeAccountFields.jsp"%>-->
+<!--            <h3>用户信息</h3>-->
+
+<!--            <table>-->
+<!--                <tr>-->
+<!--                    <td>名字:</td>-->
+<!--                    <td><input type="text" name="firstName" th:value="${session.account.firstName}" /></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>姓氏:</td>-->
+<!--                    <td><input type="text" name="lastName" th:value="${session.account.lastName }"/></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>电子邮件:</td>-->
+<!--                    <td><input type="text" size="40" name="email" th:value="${session.account.email }"/></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>联系电话:</td>-->
+<!--                    <td><input type="text" name="phone" th:value="${session.account.phone }"/></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>联系地址1:</td>-->
+<!--                    <td><input type="text" size="40" name="address1" th:value="${session.account.address1 }"/></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>联系地址2:</td>-->
+<!--                    <td><input type="text" size="40" name="address2" th:value="${session.account.address2 }"/></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>城市:</td>-->
+<!--                    <td><input type="text" name="city" th:value="${session.account.city }"/></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>省/州:</td>-->
+<!--                    <td><input type="text" size="4" name="state" th:value="${session.account.state }"/></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>邮编:</td>-->
+<!--                    <td><input type="text" size="10" name="zip" th:value="${session.account.zip }"/></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>国家:</td>-->
+<!--                    <td><input type="text" size="15" name="country" th:value="${session.account.country }"/></td>-->
+<!--                </tr>-->
+<!--            </table>-->
+
+<!--            <h3>偏好设置</h3>-->
+
+<!--            <table>-->
+<!--                <tr>-->
+<!--                    <td>首选语言:</td>-->
+<!--                    <td>-->
+<!--                        <select name="languagePreference">-->
+<!--                            <option th:each="entry:${languages}" th:value="${entry.value}"-->
+<!--                                    th:if="${session.account.languagePreference eq entry.value}" th:selected="selected">-->
+<!--                                <p th:text="${entry.key}"></p>-->
+<!--                            </option>-->
+<!--                        </select>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>最爱宠物类型:</td>-->
+<!--                    <td>-->
+<!--                        <select name="favouriteCategoryId">-->
+<!--                            <c:forEach items="${categories}" var="entry">-->
+<!--                                <option value="${entry.value}"-->
+<!--                                <c:if test="${sessionScope.account.favouriteCategoryId eq entry.value}">-->
+<!--                                    selected="selected"-->
+<!--                                </c:if> >${entry.key}</option>-->
+<!--                            </c:forEach>-->
+<!--                        </select>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>是否展示MyList</td>-->
+<!--                    <td>-->
+<!--                        <c:if test="${sessionScope.account.isListOption}" >-->
+<!--                            <input type="radio" name="isListOption" value="true" checked="checked"/>是&nbsp;&nbsp;-->
+<!--                            <input type="radio" name="isListOption" value="false" />否-->
+<!--                        </c:if>-->
+<!--                        <c:if test="${!sessionScope.account.isListOption}" >-->
+<!--                            <input type="radio" name="isListOption" value="true"/>是&nbsp;&nbsp;-->
+<!--                            <input type="radio" name="isListOption" value="false" checked="checked"/>否-->
+<!--                        </c:if>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>是否展示MyBanner</td>-->
+<!--                    <td>-->
+<!--                        <c:if test="${sessionScope.account.isBannerOption}" >-->
+<!--                            <input type="radio" name="isBannerOption" value="true" checked="checked"/>是&nbsp;&nbsp;-->
+<!--                            <input type="radio" name="isBannerOption" value="false" />否-->
+<!--                        </c:if>-->
+<!--                        <c:if test="${!sessionScope.account.isBannerOption}" >-->
+<!--                            <input type="radio" name="isBannerOption" value="true"/>是&nbsp;&nbsp;-->
+<!--                            <input type="radio" name="isBannerOption" value="false" checked="checked"/>否-->
+<!--                        </c:if>-->
+<!--                    </td>-->
+<!--                </tr>-->
+
+            </table>
+            <input type="submit" name="newAccount" value="保存账户信息" />
+
+        </form>
+    </div>
+</div>
+<div th:replace="bottom"></div>
+</body>
+</html>

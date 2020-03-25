@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+            rel="stylesheet"
+            href="../css/jpetstore.css"
+            type="text/css"
+            media="screen"
+    />
+    <title>Mypetstore</title>
+</head>
+<body>
+<div th:replace="top"></div>
+<div id="Content">
+    <span style="color: red; " th:text="${message}"></span>
+</div>
+<div th:replace="bottom"></div>
+</body>
+</html>
