@@ -6,6 +6,7 @@
 
     <cache />
 
+<!--通过id查询全部用户信息-->
     <select id="getAccountByUserId" parameterType="string" resultType="Account">
     SELECT
           SIGNON.USERID,
@@ -25,6 +26,7 @@
       AND SIGNON.USERID = ACCOUNT.USERID
   </select>
 
+<!--    通过id与密码获取整个用户-->
     <select id="getAccountByUserIdAndPassword" parameterType="Account" resultType="Account">
     SELECT
       SIGNON.USERID,
@@ -45,6 +47,7 @@
       AND SIGNON.USERID = ACCOUNT.USERID
   </select>
 
+<!--    更新用户信息-->
     <update id="updateAccount" parameterType="Account">
     UPDATE ACCOUNT SET
       EMAIL = #{email},
@@ -61,6 +64,7 @@
     WHERE USERID = #{userid}
   </update>
 
+<!--    创建用户信息-->
     <insert id="insertAccount" parameterType="Account">
     INSERT INTO ACCOUNT
       (EMAIL, FIRSTNAME, LASTNAME, STATUS, ADDR1, ADDR2, CITY, STATE, ZIP, COUNTRY, PHONE, USERID)
@@ -68,12 +72,13 @@
       (#{email}, #{firstName}, #{lastName}, 'OK', #{address1},  #{address2,jdbcType=VARCHAR}, #{city}, #{state}, #{zip}, #{country}, #{phone}, #{userid})
   </insert>
 
-
+<!--    更改密码-->
     <update id="updateSignon" parameterType="Account">
     UPDATE SIGNON SET PASSWORD = #{password}
     WHERE USERID = #{userid}
   </update>
 
+<!--    新增用户账户-->
     <insert id="insertSignon" parameterType="Account">
     INSERT INTO SIGNON (PASSWORD,USERID)
     VALUES (#{password}, #{userid})

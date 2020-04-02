@@ -6,6 +6,7 @@
 
     <cache />
 
+<!--  获取制定的商品的详细信息-->
     <select id="getProduct" parameterType="string" resultType="Product">
     SELECT
       PRODUCTID,
@@ -17,6 +18,7 @@
     WHERE PRODUCTID = #{productId}
   </select>
 
+<!--  获取指定的类别的商品列表-->
     <select id="getProductListByCategory" parameterType="string" resultType="Product">
     SELECT
       PRODUCTID,
@@ -28,6 +30,7 @@
     WHERE CATEGORY = #{value}
   </select>
 
+<!--  查询商品列表+模糊查询-->
     <select id="searchProductList" parameterType="string" resultType="Product">
     select
       PRODUCTID,
