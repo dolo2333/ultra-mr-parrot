@@ -8,6 +8,13 @@
 <body>
 <div th:replace="top"></div>
 <div id="Content">
+
+    <div id="BackLink">
+        <a th:href="'/catalog/viewCategory?categoryId='+${product.categoryId}">
+            Return to <label th:text="${product.categoryId}">Category ID</label>
+        </a>
+    </div>
+
     <div id="Catalog">
         <h2 th:text="${product.name}"></h2>
         <table>
@@ -18,16 +25,17 @@
                 <th>最后报价</th>
                 <th>&nbsp;</th>
             </tr>
+
             <tr th:each="item:${itemList}">
                 <td>
-                    <a th:href="@{viewItem(itemId=${item.itemId})}"></a>
+                    <a th:text="${item.itemId}"></a>
                 </td>
                 <td th:text="${item.product.productId}"></td>
-                <td th:text="${item.attribute1} ${item.attribute2} ${item.attribute3} ${item.attribute4} ${item.attribute5} ${product.name}"></td>
+                <td th:text="${item.attribute1}"></td>
                 <!--<fmt:formatNumber value="${item.listPrice}" pattern="$#,##0.00" />-->
                 <td th:text="${item.listPrice}"></td>
                 <td>
-                    <a th:href="@{addItemToCart(workingItemId=${item.itemId})}">添加到购物车</a>
+                    <a>添加到购物车</a>
                 </td>
             </tr>
 

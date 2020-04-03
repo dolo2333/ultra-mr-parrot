@@ -18,7 +18,7 @@
                 <th>宠物名称</th>
             </tr>
             <tr th:each="product:${productList}">
-                <td th:text="${product.productId}">productId</td>
+                <td><a th:href="@{/catalog/viewProduct?productId=}+${product.productId}" th:text="${product.productId}">productId</a></td>
                 <td th:text="${product.name}">productName</td>
             </tr>
         </table>
