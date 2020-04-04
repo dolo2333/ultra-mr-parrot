@@ -10,7 +10,7 @@
 <div id="Content">
 
     <div id="BackLink">
-        <a >
+        <a th:href="'/catalog/viewProduct?productId='+${product.productId}">
             Return to <label th:text="${product.productId}">Product ID</label>
         </a>
     </div>
