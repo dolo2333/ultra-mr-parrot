@@ -7,10 +7,7 @@ import org.csu.mypetstore.service.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,44 +44,46 @@ public class CatalogController {
         return "product";
     }
 
-//    @RequestMapping(value = "viewproduct", method = RequestMethod.GET)
-//    public ModelAndView viewProduct(HttpServletRequest request,
-//                       HttpServletResponse response) {
-//        String productId = request.getParameter("productId");
-//        List<Item> itemList = catalogService.getItemListByProduct(productId);
-//        Product product = catalogService.getProduct(productId);
-//
-//        ModelAndView mv = new ModelAndView("product");
-//        mv.addObject("product", product);
-//        mv.addObject("itemList", itemList);
-//        return mv;
-//    }
 
-    @RequestMapping(value = "viewitem", method = RequestMethod.GET)
-    public ModelAndView viewItem(HttpServletRequest request,
-                                 HttpServletResponse response) {
-        String itemId = request.getParameter("itemId");
+
+    @GetMapping("viewItem")
+    public String viewItem(String itemId, Model model) {
         Item item = catalogService.getItem(itemId);
         Product product = item.getProduct();
 
-        ModelAndView mv = new ModelAndView("item");
-        mv.addObject("product", product);
-        mv.addObject("item", item);
-        return mv;
+        processProductDescription(product);
+        model.addAttribute("item", item);
+        model.addAttribute("product", product);
+        return "item";
     }
 
-    @RequestMapping(value = "searchproducts", method = RequestMethod.GET)
-    public ModelAndView searchProducts(HttpServletRequest request,
-                                       HttpServletResponse response) {
-        ModelAndView mv = new ModelAndView("searchproducts");
 
-        String keyword = request.getParameter("keyword");
-        List<Product> productList = catalogService.searchProductList(keyword.toLowerCase());
-        if(productList.isEmpty()) {
-            mv.addObject("message", "对不起，没有符合条件的宠物。");
+
+
+
+    @PostMapping("searchProducts")
+    public String searchProducts(String keyword, Model model) {
+        if (keyword == null || keyword.length() < 1) {
+            String msg = "Please enter a keyword to search for, then press the search button.";
+            model.addAttribute("msg", msg);
+            return "error";
         } else {
-            mv.addObject("productList", productList);
+            List<Product> productList = catalogService.searchProductList(keyword.toLowerCase());
+            processProductDescription(productList);
+            model.addAttribute("productList", productList);
+            return "catalog/search_products";
         }
-        return mv;
+
+    }
+
+    private void processProductDescription(Product product){
+//        String [] temp = product.getDescription().split("\"");
+        product.setDescriptionImage("/images/"+product.getDescriptionImage());
+//        product.setDescriptionText(product.getDescription()+"hh");
+    }
+    private void processProductDescription(List<Product> productList){
+        for(Product product : productList) {
+            processProductDescription(product);
+        }
     }
 }
