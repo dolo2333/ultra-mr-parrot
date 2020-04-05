@@ -29,7 +29,7 @@ public class AccountService {
     @Transactional
     public void insertAccount(Account account){
         accountMapper.insertAccount(account);
-//        accountMapper.insertProfile(account);
+        accountMapper.insertProfile(account);
         accountMapper.insertSignon(account);
     }
 

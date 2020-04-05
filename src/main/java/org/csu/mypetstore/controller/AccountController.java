@@ -117,24 +117,34 @@ public class AccountController {
     }
 
     @PostMapping("newAccount")
-    public String newAccount(String userId,String password,String firstName,String lastName,String email,String phone,String addr1,String addr2,String city,String state,String zip,String country,Model model)
-    {
-        Account account = new Account();
-        account.setUsername(userId);
-        account.setPassword(password);
-        account.setFirstName(firstName);
-        account.setLastName(lastName);
-        account.setEmail(email);
-        account.setPhone(phone);
-        account.setAddress1(addr1);
-        account.setAddress2(addr2);
-        account.setCity(city);
-        account.setState(state);
-        account.setZip(zip);
-        account.setCountry(country);
-        System.out.println(account.toString());
+    public  String newAccount(Account account, Model model){
         accountService.insertAccount(account);
         return "catalog/main";
     }
+
+
+
+
+
+//    @PostMapping("newAccount")
+//    public String newAccount(String userId,String password,String firstName,String lastName,String email,String phone,String addr1,String addr2,String city,String state,String zip,String country,Model model)
+//    {
+//        Account account = new Account();
+//        account.setUsername(userId);
+//        account.setPassword(password);
+//        account.setFirstName(firstName);
+//        account.setLastName(lastName);
+//        account.setEmail(email);
+//        account.setPhone(phone);
+//        account.setAddress1(addr1);
+//        account.setAddress2(addr2);
+//        account.setCity(city);
+//        account.setState(state);
+//        account.setZip(zip);
+//        account.setCountry(country);
+//        System.out.println(account.toString());
+//        accountService.insertAccount(account);
+//        return "catalog/main";
+//    }
 
 }
