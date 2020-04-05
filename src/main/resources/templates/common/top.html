@@ -20,7 +20,7 @@
                     <img align="middle" src="../images/separator.gif" />
                     <a th:if="${session.account} == null" href="/account/signonForm">Sign In</a>
                     <a th:if="(${session.account} != null) and (${!session.authenticated}) " href="/account/signonForm">Sign In</a>
-                    <a th:if="(${session.account} != null) and (${session.authenticated})" href="#">Sign Out</a>
+                    <a th:if="(${session.account} != null) and (${session.authenticated})" href="/account/signoff">Sign Out</a>
                     <img th:if="(${session.account} != null) and (${session.authenticated})" align="middle" src="../images/separator.gif" />
                     <a th:if="(${session.account} != null) and (${session.authenticated})" href="#">My Account</a>
                 </div>

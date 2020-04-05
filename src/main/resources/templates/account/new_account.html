@@ -9,16 +9,16 @@
 <header th:replace="common/top"></header>
 <div id="Content">
     <div id="Catalog">
-        <form action="/account/newAccount" method="post" th:object="${newAccount}">
+        <form action="/account/newAccount" method="post" >
             <h3>User Information</h3>
             <table>
                 <tr>
                     <td>User ID:</td>
-                    <td><input type="text" th:field="*{username}"></td>
+                    <td><input type="text" name="userId"></td>
                 </tr>
                 <tr>
                     <td>New password:</td>
-                    <td><input type="password" th:field="*{password}" /></td>
+                    <td><input type="password" name="password"/></td>
                 </tr>
                 <tr>
                     <td>Repeat password:</td>

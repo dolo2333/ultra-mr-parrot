@@ -93,17 +93,17 @@
             (LANGPREF, FAVCATEGORY, USERID)
         VALUES (#{languagePreference}, #{favouriteCategoryId}, #{username})
     </insert>
-    
+
     <update id="updateSignon" parameterType="Account">
         UPDATE SIGNON SET
             PASSWORD = #{password}
         WHERE USERNAME = #{username}
     </update>
-    
+
     <insert id="insertSignon" parameterType="Account">
         INSERT INTO SIGNON
             (PASSWORD,USERNAME)
         VALUES (#{password}, #{username})
     </insert>
-    
+
 </mapper>
