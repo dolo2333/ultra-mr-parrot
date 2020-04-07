@@ -15,9 +15,11 @@
             <th>Date</th>
             <th>Total Price</th>
         </tr>
+
+
         <!--        //进行循环得出下表-->
         <tr th:each="order:${orderList}">
-            <td><a th:href="@{/order/vieworder(orderId=${order.orderId})}" th:text="${order.orderId}">1000</a></td>
+            <td><a th:href="@{/order/viewOrder?orderId=}+${order.orderId}" th:text="${order.orderId}">1000</a></td>
             <td th:text="${order.orderDate}">2014/03/23 12:00:00</td>
             <td th:text="${order.totalPrice}">$18.50</td>
         </tr>

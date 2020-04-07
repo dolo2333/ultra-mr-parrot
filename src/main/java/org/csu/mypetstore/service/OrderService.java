@@ -15,4 +15,7 @@ public class OrderService {
         return orderMapper.getOrderListByUsername(username);
     }
 
+    public Order getOrder(int orderId) {
+        return orderMapper.getOrder(orderId);
+    }
 }
