@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.csu.mypetstore.persistence.OrderMapper">
+    <select id="getOrderListByUsername" parameterType="String" resultType="Order">
+    select
+        billaddr1 as billaddress1,
+        billaddr2 as billaddress2,
+        billcity,
+        billcountry,
+        billstate,
+        billtofirstname,
+        billtolastname,
+        billzip,
+        shipaddr1 as shipAddress1,
+        shipaddr2 as shipAddress2,
+        shipcity,
+        shipcountry,
+        shipstate,
+        shiptofirstname,
+        shiptolastname,
+        shipzip,
+        cardtype,
+        courier,
+        creditcard,
+        exprdate as expiryDate,
+        locale,
+        orderdate,
+        orders.orderid,
+        totalprice,
+        userid as username,
+        status
+    from orders, orderstatus
+    where orders.userid = #{value}
+        and orders.orderid = orderstatus.orderid
+        order by orderdate
+    </select>
+
+    <select id="insertOrder" parameterType="Order">
+    insert into orders (orderid, userid, orderdate, shipaddr1, shipaddr2, shipcity, shipstate,
+        shipzip, shipcountry, billaddr1, billaddr2, billcity, billstate, billzip, billcountry,
+        courier, totalprice, billtofirstname, billtolastname, shiptofirstname, shiptolastname,
+        creditcard, exprdate, cardtype, locale)
+    values(#{orderId}, #{username}, #{orderDate}, #{shipAddress1}, #{shipAddress2,jdbcType=VARCHAR}, #{shipCity},
+        #{shipState}, #{shipZip}, #{shipCountry}, #{billAddress1}, #{billAddress2,jdbcType=VARCHAR}, #{billCity},
+        #{billState}, #{billZip}, #{billCountry}, #{courier}, #{totalPrice}, #{billToFirstName}, #{billToLastName},
+        #{shipToFirstName}, #{shipToLastName}, #{creditCard}, #{expiryDate}, #{cardType}, #{locale})
+    </select>
+
+    <select id="getOrder" parameterType="int" resultType="Order">
+    select
+        billaddr1 as billAddress1,
+        billaddr2 as billAddress2,
+        billcity,
+        billcountry,
+        billstate,
+        billtofirstname,
+        billtolastname,
+        billzip,
+        shipaddr1 as shipAddress1,
+        shipaddr2 as shipAddress2,
+        shipcity,
+        shipcountry,
+        shipstate,
+        shiptofirstname,
+        shiptolastname,
+        shipzip,
+        cardtype,
+        courier,
+        creditcard,
+        exprdate as expiryDate,
+        locale,
+        orderdate,
+        orders.orderid,
+        totalprice,
+        userid as username,
+        status
+    from orders, orderstatus
+    where orders.orderid = #{value}
+        and orders.orderid = orderstatus.orderid
+    </select>
+
+    <select id="insertOrderStatus" parameterType="Order">
+        insert into orderstatus (orderid, linenum, timestamp, status)
+    values (#{orderId,jdbcType=NUMERIC}, #{orderId,jdbcType=NUMERIC}, #{orderDate,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR})
+    </select>
+</mapper>
