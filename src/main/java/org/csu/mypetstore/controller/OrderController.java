@@ -1,9 +1,7 @@
 package org.csu.mypetstore.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
+
 import org.csu.mypetstore.domain.Account;
-import org.csu.mypetstore.domain.Cart;
-import org.csu.mypetstore.domain.LineItem;
 import org.csu.mypetstore.domain.Order;
 import org.csu.mypetstore.service.AccountService;
 import org.csu.mypetstore.service.OrderService;
