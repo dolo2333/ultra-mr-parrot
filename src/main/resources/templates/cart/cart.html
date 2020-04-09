@@ -22,6 +22,7 @@
                     <th><b>Product ID</b></th>
                     <th><b>Description</b></th>
                     <th><b>In Stock?</b></th>
+                    <th><b>Inventory</b></th>
                     <th><b>Quantity</b></th>
                     <th><b>List Price</b></th>
                     <th><b>Total Cost</b></th>
@@ -38,6 +39,7 @@
                     <td th:text="${cartItem.item.product.productId}"></td>
                     <td th:text="${cartItem.item.attribute1}+${cartItem.item.product.name}"></td>
                     <td th:text="${cartItem.inStock}"></td>
+                    <td th:text="${cartItem.item.quantity}"></td>
                     <td>
                         <input type="text" th:name="${cartItem.item.itemId}" th:value="${cartItem.quantity}">
                     </td>
