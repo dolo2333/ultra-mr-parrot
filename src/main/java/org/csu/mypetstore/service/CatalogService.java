@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CatalogService {
@@ -51,6 +52,10 @@ public class CatalogService {
 
     public boolean isItemInStock(String itemId){
         return itemMapper.getInventoryQuantity(itemId) > 0;
+    }
+
+    public void updateInventoryQuantity(Map<String, Object> param){
+        itemMapper.updateInventoryQuantity(param);
     }
 
 }

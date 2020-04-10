@@ -18,4 +18,12 @@ public class OrderService {
     public Order getOrder(int orderId) {
         return orderMapper.getOrder(orderId);
     }
+
+    public void insertOrder(Order order){
+        orderMapper.insertOrder(order);
+    }
+
+    public void insertOrderStatus(Order order){
+        orderMapper.insertOrderStatus(order);
+    }
 }

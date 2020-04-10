@@ -78,5 +78,13 @@ public class Cart implements Serializable {
         }
         return subTotal;
     }
+    public void clean()
+    {
+        this.itemList.clear();
+        this.itemMap.clear();
+    }
 
+    public Map<String, CartItem> getItemMap() {
+        return itemMap;
+    }
 }
