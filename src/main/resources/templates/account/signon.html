@@ -11,19 +11,19 @@
 <div id="Content">
     <div id="Catalog">
         <form action="/account/signon" method="post">
-<!--            <p>Please enter your username and password.</p>-->
-<!--            <p>-->
-<!--                Username:<input type="text" name="username"><br/>-->
-<!--                Password:<input type="password" name="password">-->
-<!--            </p>-->
-            <p>输入手机号</p>
-            <label for="userName">手机号</label>
-            <input type="text" placeholder="请输入手机号" autocomplete="off" id="memPhone" name="memPhone">
-            <label for="userName">验证码</label>
-            <input type="text" placeholder="请输入验证码" autocomplete="off" id="code" name="code" maxlength="6" style="width: 50%;display: inline">
-            <input type="button" value="获取验证码" id="sendBtn"
-                   style="width:41%;margin-left: 18px;border-color:#1e9fff !important;" onclick="sendCode(this)"/>
-<!--            <p th:if="${msg!=null}" th:text="${msg}"></p>-->
+            <p>Please enter your username and password.</p>
+            <p>
+                Username:<input type="text" name="username"><br/>
+                Password:<input type="password" name="password">
+            </p>
+<!--            <p>输入手机号</p>-->
+<!--            <label for="userName">手机号</label>-->
+<!--            <input type="text" placeholder="请输入手机号" autocomplete="off" id="memPhone" name="memPhone">-->
+<!--            <label for="userName">验证码</label>-->
+<!--            <input type="text" placeholder="请输入验证码" autocomplete="off" id="code" name="code" maxlength="6" style="width: 50%;display: inline">-->
+<!--            <input type="button" value="获取验证码" id="sendBtn"-->
+<!--                   style="width:41%;margin-left: 18px;border-color:#1e9fff !important;" onclick="sendCode(this)"/>-->
+            <p th:if="${msg!=null}" th:text="${msg}"></p>
             <input type="submit" value="Login">
         </form>
 
