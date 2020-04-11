@@ -20,11 +20,13 @@ public class CatalogController {
     @Autowired
     private CatalogService catalogService;
 
+    //返回到主页面
     @GetMapping("index")
     public String index() {
         return "catalog/main";
     }
 
+    //查看商品列表
     @GetMapping("viewCategory")
     public String viewCategory(String categoryId, Model model) {
         if (categoryId != null) {
@@ -36,6 +38,7 @@ public class CatalogController {
         return "catalog/category";
     }
 
+    //查看商品内容
     @GetMapping("viewProduct")
     public String viewProduct(String productId, Model model) {
         if (productId != null) {

@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -43,13 +47,21 @@ public class AccountController {
         CATEGORY_LIST = Collections.unmodifiableList(catList);
     }
 
+    //登录表单
     @GetMapping("signonForm")
     public String signonForm() {
         return "account/signon";
     }
 
+    //登录账户
     @PostMapping("signon")
-    public String signon(String username, String password, Model model) {
+    public String signon(String username, String password, Model model) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+
+        //判断密码并进行加密
+        if(!password.equals("")){
+            password = toMD5(password);
+        }
+
         Account account = accountService.getAccount(username, password);
 
         if (account == null) {
@@ -57,7 +69,9 @@ public class AccountController {
             model.addAttribute("msg", msg);
             return "account/signon";
         } else {
-            account.setPassword(null);
+//            account.setPassword(toMD5(account.getPassword()));
+            System.out.println("username: " + account.getUsername() + "password:" + account.getPassword());
+//            account.setPassword(null);
             List<Product> myList = catalogService.getProductListByCategory(account.getFavouriteCategoryId());
             boolean authenticated = true;
             model.addAttribute("account", account);
@@ -67,6 +81,7 @@ public class AccountController {
         }
     }
 
+    //登出
     @GetMapping("signoff")
     public String signoff(Model model) {
         Account loginAccount = new Account();
@@ -86,6 +101,7 @@ public class AccountController {
         return "account/edit_account";
     }
 
+    //修改用户信息
     @PostMapping("editAccount")
     public String editAccount(Account account, String repeatedPassword, Model model) {
         if (account.getPassword() == null || account.getPassword().length() == 0 || repeatedPassword == null || repeatedPassword.length() == 0) {
@@ -108,6 +124,7 @@ public class AccountController {
         }
     }
 
+    //创建一个新的用户表单
     @GetMapping("newAccountForm")
     public String newAccountForm(Model model){
         model.addAttribute("newAccount",new Account());
@@ -116,13 +133,32 @@ public class AccountController {
         return "account/new_account";
     }
 
+    //创建一个新的用户
     @PostMapping("newAccount")
-    public  String newAccount(Account account, Model model){
+    public  String newAccount(Account account, Model model) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        //对密码进行加密
+        String temp = toMD5(account.getPassword());
+        account.setPassword(temp);
         accountService.insertAccount(account);
         return "catalog/main";
     }
 
+    //加密函数，用于将接收到的密码加密并返回值
+    public static String toMD5(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        MessageDigest md=MessageDigest.getInstance("MD5");
+        byte[] strByteArray=str.getBytes("utf-8");
+        byte[] mdByteArray=md.digest(strByteArray);
+        StringBuffer hexValue=new StringBuffer();
+        for(int i=0;i<mdByteArray.length;i++){
+            int val=((int)mdByteArray[i])&0xff;
+            if(val<16){
+                hexValue.append("0");
+            }
+            hexValue.append(Integer.toHexString(val));
+        }
+        return hexValue.toString();
 
+    }
 
 
 
