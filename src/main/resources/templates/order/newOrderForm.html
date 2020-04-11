@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<header th:replace="common/top"></header>
+<div id="Content">
+    <div id="Catalog">
+        <form action="confirmOrder" method="post">
+            <table>
+                <tr>
+                    <th colspan=2>Payment Details</th>
+                </tr>
+                <tr>
+                    <td>Card Type:</td>
+                    <td>
+                        <select name="cardType" required="required">
+                            <option>Visa</option>
+                            <option>MasterCard</option>
+                            <option>American Express</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Card Number:</td>
+                    <td>
+                        <input type="text" name="cardNumber" required="required"th:value="99999999"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Expiry Date :</td>
+                    <td><input type="date" name="exprDate" required="required" th:value="2020-4-10"/></td>
+                </tr>
+                <tr>
+                    <th colspan=2>Billing Address</th>
+                </tr>
+
+                <tr>
+                    <td>First name:</td>
+                    <td><input type="text" name="billFirstName" required="required"
+                               th:value="${session.account.firstName}"/></td>
+                </tr>
+                <tr>
+                    <td>Last name:</td>
+                    <td><input type="text" name="billLastName" required="required"
+                               th:value="${session.account.lastName}"/></td>
+                </tr>
+                <tr>
+                    <td>Address 1:</td>
+                    <td><input type="text" name="billAddr1" required="required" th:value="${session.account.address1}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Address 2(选填):</td>
+                    <td><input type="text" name="billAddr2" th:value="${session.account.address2}"/></td>
+                </tr>
+                <tr>
+                    <td>City:</td>
+                    <td><input type="text" name="billCity" required="required" th:value="${session.account.city}"/></td>
+                </tr>
+                <tr>
+                    <td>State:</td>
+                    <td><input type="text" name="billState" required="required" th:value="${session.account.state}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Zip:</td>
+                    <td><input type="text" name="billZip" required="required" th:value="${session.account.zip}"/></td>
+                </tr>
+                <tr>
+                    <td>Country:</td>
+                    <td><input type="text" name="billCountry" required="required"
+                               th:value="${session.account.country}"/></td>
+                </tr>
+
+                <tr>
+                    <td colspan=2>
+                        <input type="checkbox" name="shipAddr">
+                        Ship to different address...
+                    </td>
+                </tr>
+
+            </table>
+
+            <input type="submit" value="Continue">
+
+        </form>
+    </div>
+</div>
+
+<footer th:replace="common/bottom"></footer>
+</body>
+</html>

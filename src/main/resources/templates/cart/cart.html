@@ -22,6 +22,7 @@
                     <th><b>Product ID</b></th>
                     <th><b>Description</b></th>
                     <th><b>In Stock?</b></th>
+                    <th><b>Inventory</b></th>
                     <th><b>Quantity</b></th>
                     <th><b>List Price</b></th>
                     <th><b>Total Cost</b></th>
@@ -33,11 +34,13 @@
 
                 <tr th:each="cartItem:${cart.cartItems}">
                     <td>
-                        <a th:href="'/catalog/viewItem?itemId='+${cartItem.item.itemId}" th:text="${cartItem.item.itemId}"></a>
+                        <a th:href="'/catalog/viewItem?itemId='+${cartItem.item.itemId}"
+                           th:text="${cartItem.item.itemId}"></a>
                     </td>
                     <td th:text="${cartItem.item.product.productId}"></td>
                     <td th:text="${cartItem.item.attribute1}+${cartItem.item.product.name}"></td>
                     <td th:text="${cartItem.inStock}"></td>
+                    <td th:text="${cartItem.item.quantity}"></td>
                     <td>
                         <input type="text" th:name="${cartItem.item.itemId}" th:value="${cartItem.quantity}">
                     </td>
@@ -46,6 +49,7 @@
                     <td>
                         <a class="Button" th:href="'/cart/removeItemFromCart?workingItemId='+${cartItem.item.itemId}">Remove</a>
                     </td>
+                    <td th:if="${cartItem.inStock!=true}" th:text="库存不足"></td>
                 </tr>
 
                 <tr>
@@ -58,7 +62,7 @@
             </table>
         </form>
 
-        <a class="Button" th:if="${cart.numberOfItems > 0}" href="#">
+        <a class="Button" th:if="${cart.numberOfItems > 0}" href="/order/newOrder">
             Proceed to Checkout
         </a>
 

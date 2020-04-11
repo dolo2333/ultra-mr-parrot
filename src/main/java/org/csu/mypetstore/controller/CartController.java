@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.annotation.SessionScope;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import java.util.Iterator;
 @Controller
 @SessionScope
 @RequestMapping("/cart/")
+@SessionAttributes({"cart"})
 public class CartController {
 
     @Autowired
@@ -64,10 +66,20 @@ public class CartController {
             String itemId = cartItem.getItem().getItemId();
             try{
                 int quantity = Integer.parseInt(request.getParameter(itemId));
-                cart.setQuantityByItemId(itemId,quantity);
-                if(quantity < 1){
-                    cartItems.remove();
+                if(quantity<=cartItem.getItem().getQuantity()) {
+                    cart.setQuantityByItemId(itemId, quantity);
+                    cartItem.setInStock(true);
+                    if (quantity < 1) {
+                        cartItems.remove();
+                    }
+                } else {
+                    cart.setQuantityByItemId(itemId, quantity);
+                    cartItem.setInStock(false);
+                    if (quantity < 1) {
+                        cartItems.remove();
+                    }
                 }
+
             }catch (Exception e){
 
             }
