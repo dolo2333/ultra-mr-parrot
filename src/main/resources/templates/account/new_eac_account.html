@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<header th:replace="common/top"></header>
+<<div id="Content">
+    <div id="Catalog">
+        <form action="/account/newAccount" method="post" th:object="${newAccount}">
+            <h3>User Information</h3>
+            <table>
+                <tr>
+                    <td>User ID:</td>
+                    <td><input type="text" th:field="*{username}"></td>
+                </tr>
+                <tr>
+                    <td>New password:</td>
+                    <td><input type="password" th:field="*{password}" /></td>
+                </tr>
+                <tr>
+                    <td>Repeat password:</td>
+                    <td><input type="password" name="repeatedPassword" /></td>
+                </tr>
+                <tr>
+                    <td>E-mail:</td>
+                    <td><input type="email" id="email" th:field="*{email}"></td>
+                </tr>
+                <tr>
+                    <td>Code Here:</td>
+                    <td><input type="text" id="checkCode"/></td>
+                    <td><a id="sendCode" type="button">Send</a></td>
+                </tr>
+                <tr>
+                    <td th:text="${msg}"></td>
+                </tr>
+                <tr>
+                    <p><a href="/account/newAccountFormByEAC">a new account by e-mail?</a></p>
+                </tr>
+            </table>
+            <input type="submit" value="Save Account Information">
+        </form>
+        <a href="#">My Orders</a>
+    </div>
+</div>
+<script>
+    $("#sendCode").click(function () {
+
+        var email = $("#email").val();alert(email);
+        if (email == null || email === "") {
+            alert("请输入邮箱！！！");
+            return;
+        }
+        $.ajax({
+            url: "/eac/getCode?email=" + email,
+            type: "get",
+            async: false,
+            success: function (text) {
+                if (text != null && text !== "") {
+                    alert("已发送");
+                } else {
+                    alert("获取失败，请重新获取")
+                }
+            }
+        });
+    });
+
+    $("#submit").click(function (data) {
+        var inputCode = $("#checkCode").val();
+        $.ajax({
+            url: "/account/newEAccount",
+            type: "POST",
+            data: data.field,
+            async:false,
+            success:function (text) {
+                if ("ok" === text){
+                    alert("注册成功,将跳转到初始界面",function () {
+                        window.location.href = "index.html";
+                    });
+                }else{
+                    alert("注册失败");
+                }
+            }
+        })
+    })
+</script>
+<footer th:replace="common/bottom"></footer>
+</body>
+</html>
+
+

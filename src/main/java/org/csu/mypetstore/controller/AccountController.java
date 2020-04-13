@@ -133,9 +133,28 @@ public class AccountController {
         return "account/new_account";
     }
 
+    // 邮箱验证的新账户 跳转
+    @RequestMapping("newAccountFormByEAC")
+    public String newAccountForm_eac(Model model) {
+        model.addAttribute("newAccount",new Account());
+        model.addAttribute("LANGUAGE_LIST", LANGUAGE_LIST);
+        model.addAttribute("CATEGORY_LIST", CATEGORY_LIST);
+        return "account/new_eac_account";
+    }
+
     //创建一个新的用户
     @PostMapping("newAccount")
     public  String newAccount(Account account, Model model) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        //对密码进行加密
+        String temp = toMD5(account.getPassword());
+        account.setPassword(temp);
+        accountService.insertAccount(account);
+        return "catalog/main";
+    }
+
+    //从邮箱创建一个新的用户
+    @PostMapping("newEAccount")
+    public String newEAccount(Account account, Model model) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         //对密码进行加密
         String temp = toMD5(account.getPassword());
         account.setPassword(temp);
